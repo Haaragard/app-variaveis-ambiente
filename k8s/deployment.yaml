@@ -17,13 +17,18 @@ spec:
           image: haaragard/app-variaveis-ambiente:v1
           ports:
             - containerPort: 8080
-          env:
-            - name: APP_NAME
-              value: "Minha Aplicação Kubernetes"
-            - name: APP_VERSION
-              value: "v2.5"
-            - name: APP_AUTHOR
-              value: "Diogo Antunes"
+          envFrom:
+            - configMapRef:
+                name: app-config
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: app-config
+data:
+  APP_NAME: "Aplicação ConfigMap"
+  APP_VERSION: "v4.0"
+  APP_AUTHOR: "Diogo Antunes"
 ---
 apiVersion: v1
 kind: Service
