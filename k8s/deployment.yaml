@@ -18,17 +18,29 @@ spec:
           ports:
             - containerPort: 8080
           envFrom:
-            - configMapRef:
-                name: app-config
+#            - configMapRef:
+#                name: app-config
+            - secretRef:
+                name: app-secret
+# ---
+# apiVersion: v1
+# kind: ConfigMap
+# metadata:
+#   name: app-config
+# data:
+#   APP_NAME: "Aplicação ConfigMap"
+#   APP_VERSION: "v4.0"
+#   APP_AUTHOR: "Diogo Antunes"
 ---
 apiVersion: v1
-kind: ConfigMap
+kind: Secret
 metadata:
-  name: app-config
+  name: app-secret
+type: Opaque
 data:
-  APP_NAME: "Aplicação ConfigMap"
-  APP_VERSION: "v4.0"
-  APP_AUTHOR: "Diogo Antunes"
+  APP_NAME: "QXBsaWNhw6fDo28gU2VjcmV0" # APP_NAME="Aplicação Secret"
+  APP_VERSION: "djUuMA==" # APP_VERSION="v5.0"
+  APP_AUTHOR: "RGlvZ28gQW50dW5lcyAtLVNlY3JldC0t" # APP_AUTHOR="Diogo Antunes --Secret--"
 ---
 apiVersion: v1
 kind: Service
